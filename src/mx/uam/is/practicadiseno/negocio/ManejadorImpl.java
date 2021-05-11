@@ -35,7 +35,7 @@ public class ManejadorImpl implements Manejador {
 	 */
 	public boolean agrega(String dato) {
     boolean flag = mapeador.agrega(dato);
-    notifica();
+    notifica();// notificamos a todos los observadores
     return flag;
 	}
 
@@ -46,7 +46,9 @@ public class ManejadorImpl implements Manejador {
 	 * @return true si se borro exitosamente, false sino
 	 */
 	public boolean borra(String dato) {
-		return mapeador.borra(dato);
+		boolean flag = mapeador.borra(dato);
+    notifica();// notificamos a todos los observadores
+    return flag;
 	}
 
 	/**
@@ -70,6 +72,9 @@ public class ManejadorImpl implements Manejador {
     return observadores.remove(o);
   }
 
+  /**
+   * Método que notifica a todos los observadores.
+   */
   public void notifica() {
     for (Observador o : observadores){
       o.actualiza();
