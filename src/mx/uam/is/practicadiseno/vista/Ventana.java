@@ -12,8 +12,9 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 
 import mx.uam.is.practicadiseno.negocio.Manejador;
+import mx.uam.is.practicadiseno.negocio.Observador;
 
-public class Ventana extends JFrame {
+public class Ventana extends JFrame implements Observador{
 
 	private static final long serialVersionUID = 1L;
 
@@ -43,11 +44,14 @@ public class Ventana extends JFrame {
 		// Guarda la referencia al programa
 		this.manejador = manejador;
 
+    // Registramos la instancia de Ventana como observador
+    this.manejador.agregaObservador(this);
+
 		actualiza();
 
 	}
 
-	private void actualiza() {
+	public void actualiza() {
 		getJList().setListData(manejador.dameDatos());
 	}
 
