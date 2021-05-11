@@ -53,8 +53,13 @@ public class ManejadorImpl implements Manejador {
 	 * Metodo llamado cuando se cierra la ventana
 	 *
 	 */
-	public void finaliza() {
-		System.exit(0);
+	public void finaliza(Observador o) {
+    //quitamos al observador de la lista de observadores
+    quitaObservador(o);
+    //si ya no hay más ventanas finalizamos el programa
+    if(observadores.isEmpty()){
+		  System.exit(0);
+    }
 	}
 
   public boolean agregaObservador(Observador o) {

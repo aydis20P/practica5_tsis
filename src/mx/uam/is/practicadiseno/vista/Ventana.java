@@ -39,16 +39,15 @@ public class Ventana extends JFrame implements Observador{
 	public Ventana(Manejador manejador) {
 		super();
 
-		initialize();
-
 		// Guarda la referencia al programa
 		this.manejador = manejador;
+
+		initialize();
 
     // Registramos la instancia de Ventana como observador
     this.manejador.agregaObservador(this);
 
 		actualiza();
-
 	}
 
 	public void actualiza() {
@@ -61,22 +60,19 @@ public class Ventana extends JFrame implements Observador{
 	 * @return void
 	 */
 	private void initialize() {
+    Ventana ventana = this;//variable para mandar al llamar el método finalizar()
 		this.setSize(406, 319);
 		this.setContentPane(getJContentPane());
 		this.setTitle("JFrame");
 		this.addWindowListener(new java.awt.event.WindowAdapter() {
 			public void windowClosing(java.awt.event.WindowEvent e) {
 				// Codigo llamado cuando se cierra la ventana
-				manejador.finaliza();
+				manejador.finaliza(ventana);//mandamos la ventana como parámetro para quitarla de la lista de obsevadores ;)
 			}
 		});
 	}
 
-	/**
-	 * This method initializes jContentPane
-	 *
-	 * @return javax.swing.JPanel
-	 */
+	/** * This method initializes jContentPane * * @return javax.swing.JPanel */
 	private JPanel getJContentPane() {
 		if (jContentPane == null) {
 			jContentPane = new JPanel();

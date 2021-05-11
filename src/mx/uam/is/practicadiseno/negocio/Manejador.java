@@ -31,7 +31,7 @@ public interface Manejador {
 	 * Metodo llamado cuando se cierra la ventana
 	 *
 	 */
-	public void finaliza();
+	public void finaliza(Observador o);
 
   // agregar un observador a la lista de observadores
   public boolean agregaObservador(Observador o);
