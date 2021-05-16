@@ -1,5 +1,6 @@
 package mx.uam.is.practicadiseno.negocio;
 
+import mx.uam.is.practicadiseno.vista.Ventana;
 
 public interface Manejador {
 
@@ -30,6 +31,14 @@ public interface Manejador {
 	 * Metodo llamado cuando se cierra la ventana
 	 *
 	 */
-	public void finaliza();
+	public void finaliza(Observador o);
 
+  // agregar un observador a la lista de observadores
+  public boolean agregaObservador(Observador o);
+
+  // quitar un observador de la lista de observadores
+  public boolean quitaObservador(Observador o);
+
+  // llamar actualiza() sobre todos los observadores
+  public void notifica();
 }

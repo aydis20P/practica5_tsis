@@ -12,8 +12,9 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 
 import mx.uam.is.practicadiseno.negocio.Manejador;
+import mx.uam.is.practicadiseno.negocio.Observador;
 
-public class Ventana extends JFrame {
+public class Ventana extends JFrame implements Observador{
 
 	private static final long serialVersionUID = 1L;
 
@@ -38,16 +39,18 @@ public class Ventana extends JFrame {
 	public Ventana(Manejador manejador) {
 		super();
 
-		initialize();
-
 		// Guarda la referencia al programa
 		this.manejador = manejador;
 
-		actualiza();
+		initialize();
 
+    // Registramos la instancia de Ventana como observador
+    this.manejador.agregaObservador(this);
+
+		actualiza();
 	}
 
-	private void actualiza() {
+	public void actualiza() {
 		getJList().setListData(manejador.dameDatos());
 	}
 
@@ -57,22 +60,19 @@ public class Ventana extends JFrame {
 	 * @return void
 	 */
 	private void initialize() {
+    Ventana ventana = this;//variable para mandar al llamar el método finalizar()
 		this.setSize(406, 319);
 		this.setContentPane(getJContentPane());
 		this.setTitle("JFrame");
 		this.addWindowListener(new java.awt.event.WindowAdapter() {
 			public void windowClosing(java.awt.event.WindowEvent e) {
 				// Codigo llamado cuando se cierra la ventana
-				manejador.finaliza();
+				manejador.finaliza(ventana);//mandamos la ventana como parámetro para quitarla de la lista de obsevadores ;)
 			}
 		});
 	}
 
-	/**
-	 * This method initializes jContentPane
-	 *
-	 * @return javax.swing.JPanel
-	 */
+	/** * This method initializes jContentPane * * @return javax.swing.JPanel */
 	private JPanel getJContentPane() {
 		if (jContentPane == null) {
 			jContentPane = new JPanel();

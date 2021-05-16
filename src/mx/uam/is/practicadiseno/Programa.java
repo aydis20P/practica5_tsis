@@ -21,9 +21,13 @@ public class Programa {
 
 		// Crea la ventana y le pasa referencia
 		Ventana ventana = new Ventana(manejador);
+		Ventana ventana2 = new Ventana(manejador);
+		Ventana ventana3 = new Ventana(manejador);
 
 		// Muestra la ventana arrancando asi el programa
 		ventana.setVisible(true);
+		ventana2.setVisible(true);
+		ventana3.setVisible(true);
 	}
 
 }
